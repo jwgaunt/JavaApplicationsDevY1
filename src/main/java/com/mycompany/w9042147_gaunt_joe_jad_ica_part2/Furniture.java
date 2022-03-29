@@ -13,11 +13,11 @@ import java.io.Serializable;
 public abstract class Furniture implements Serializable {
     
     protected int idNumber;
-    protected double itemPrice;
+    protected int itemPrice;
     protected typeOfWood typeOfWood;
     protected int quantity;
 
-    public Furniture(int idNumber, double itemPrice, typeOfWood typeOfWood, int quantity) {
+    public Furniture(int idNumber, int itemPrice, typeOfWood typeOfWood, int quantity) {
         this.idNumber = idNumber;
         this.itemPrice = itemPrice;
         this.typeOfWood = typeOfWood;

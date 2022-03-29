@@ -12,8 +12,8 @@ public class Chair extends Furniture {
     
     private boolean armrests;
 
-    public Chair(boolean armrests, int idNumber, double itemPrice,
-            typeOfWood typeOfWood, int quantity) {
+    public Chair(int idNumber, int itemPrice,
+            typeOfWood typeOfWood, int quantity, boolean armrests) {
         super(idNumber, itemPrice, typeOfWood, quantity);
         this.armrests = armrests;
     }

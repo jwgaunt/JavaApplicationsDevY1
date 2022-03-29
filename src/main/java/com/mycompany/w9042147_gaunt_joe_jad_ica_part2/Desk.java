@@ -14,18 +14,23 @@ public class Desk extends Furniture {
     private int width;
     private int depth;
 
-    public Desk(int numberOfDraws, int width, int depth, int idNumber, double itemPrice, String typeOfWood) {
-        super(idNumber, itemPrice, typeOfWood);
+    public Desk(int idNumber, int itemPrice, typeOfWood typeOfWood,
+            int quantity, int numberOfDraws, int width, int depth) {
+        super(idNumber, itemPrice, typeOfWood, quantity);
         this.numberOfDraws = numberOfDraws;
         this.width = width;
         this.depth = depth;
     }
+
+
     
 
     
-    public double calculatePrice(){
-        
-        return 0;
+    public int calculatePrice(int numberOfDraws){
+        itemPrice = ((80 + width + depth) + (depth * width)
+                * typeOfWood.getPriceOfWood() + (numberOfDraws * 850));
+                
+        return itemPrice;
         
     }
 

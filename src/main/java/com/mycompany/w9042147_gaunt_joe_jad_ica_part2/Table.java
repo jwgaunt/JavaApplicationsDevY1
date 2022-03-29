@@ -22,7 +22,7 @@ public class Table extends Furniture {
     
 
     public Table (int idNumber, 
-            double itemPrice, 
+            int itemPrice, 
             typeOfWood typeOfWood, 
             int quantity, 
             double sizeOfTable, 
