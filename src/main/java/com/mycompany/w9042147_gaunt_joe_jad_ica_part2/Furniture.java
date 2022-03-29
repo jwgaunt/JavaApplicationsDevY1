@@ -14,10 +14,10 @@ public abstract class Furniture implements Serializable {
     
     protected int idNumber;
     protected double itemPrice;
-    protected String typeOfWood;
+    protected typeOfWood typeOfWood;
     protected int quantity;
 
-    public Furniture(int idNumber, double itemPrice, String typeOfWood) {
+    public Furniture(int idNumber, double itemPrice, typeOfWood typeOfWood, int quantity) {
         this.idNumber = idNumber;
         this.itemPrice = itemPrice;
         this.typeOfWood = typeOfWood;
@@ -25,8 +25,6 @@ public abstract class Furniture implements Serializable {
        
     }
    
-    
-    
     public double calculatePrice(){
         
         return 0;

@@ -14,20 +14,25 @@ public class Table extends Furniture {
     
     private double sizeOfTable;
     
-    private String typeOfWood;
+    private int priceOfWood;
     
-    private String baseType;
+    private int priceOfBase;
+    
+    private baseType baseType;
     
 
-    public Table(double sizeOfTable, String baseType, int idNumber, double itemPrice, String typeOfWood) {
-        super(idNumber, itemPrice, typeOfWood);
+    public Table (int idNumber, 
+            double itemPrice, 
+            typeOfWood typeOfWood, 
+            int quantity, 
+            double sizeOfTable, 
+            baseType baseType ){
+        super(idNumber, itemPrice, typeOfWood, quantity);
         this.sizeOfTable = sizeOfTable;
         this.baseType = baseType;
-        this.diameter = diameter;
     }
     
-
-    
+    @Override
     public double calculatePrice(){
         
         int amountOfWood = this.diameter * this.diameter;

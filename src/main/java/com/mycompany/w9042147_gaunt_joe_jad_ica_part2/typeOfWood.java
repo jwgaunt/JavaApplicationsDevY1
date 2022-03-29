@@ -10,6 +10,7 @@ package com.mycompany.w9042147_gaunt_joe_jad_ica_part2;
  */
 public enum typeOfWood {
     Oak(4), Walnut(3);
+    
     private final int priceOfWood;
     
     typeOfWood(int priceOfWood){
