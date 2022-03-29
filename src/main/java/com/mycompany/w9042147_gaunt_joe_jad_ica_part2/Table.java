@@ -10,18 +10,30 @@ package com.mycompany.w9042147_gaunt_joe_jad_ica_part2;
  */
 public class Table extends Furniture {
     
+    private int diameter;
+    
     private double sizeOfTable;
+    
+    private String typeOfWood;
     
     private String baseType;
     
-    public Table(double sizeOfTable, String baseType){
+
+    public Table(double sizeOfTable, String baseType, int idNumber, double itemPrice, String typeOfWood) {
+        super(idNumber, itemPrice, typeOfWood);
         this.sizeOfTable = sizeOfTable;
         this.baseType = baseType;
+        this.diameter = diameter;
     }
+    
+
     
     public double calculatePrice(){
         
-        return 0;
+        int amountOfWood = this.diameter * this.diameter;
+        itemPrice = (amountOfWood * typeOfWood.getPriceOfWood()) + baseType.getPriceOfBase();
+        this.itemPrice = itemPrice * quantity;
+        return itemPrice;
         
     }   
 

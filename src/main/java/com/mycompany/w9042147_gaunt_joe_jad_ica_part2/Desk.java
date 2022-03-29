@@ -13,13 +13,15 @@ public class Desk extends Furniture {
     private int numberOfDraws;
     private int width;
     private int depth;
-    
-    public Desk(){
-        
+
+    public Desk(int numberOfDraws, int width, int depth, int idNumber, double itemPrice, String typeOfWood) {
+        super(idNumber, itemPrice, typeOfWood);
         this.numberOfDraws = numberOfDraws;
         this.width = width;
         this.depth = depth;
     }
+    
+
     
     public double calculatePrice(){
         

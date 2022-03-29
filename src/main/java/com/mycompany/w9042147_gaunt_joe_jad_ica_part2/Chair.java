@@ -12,9 +12,14 @@ public class Chair extends Furniture {
     
     private boolean armrests;
     
-    public Chair(boolean armrests){
+
+    public Chair(boolean armrests, int idNumber, double itemPrice, String typeOfWood) {
+        super(idNumber, itemPrice, typeOfWood);
         this.armrests = armrests;
     }
+    
+    
+    
     
     public double calculatePrice(){
         
