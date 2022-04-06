@@ -13,12 +13,15 @@ import java.util.ArrayList;
  */
 public class Order implements Serializable {
     
+    //private int totalPrice;
     private ArrayList<Furniture> Products = new ArrayList<>();
     
+
     public void addProduct(Furniture furniture){
         Products.add(furniture);
         
     }
+    
     
     public String save(){
         
@@ -34,14 +37,20 @@ public class Order implements Serializable {
         System.out.println(Products.toString());
     }
     
-    public double getTotalPrice(){
-        
-        return 0;
+    public int getTotalPrice(){
+        int totalPrice = 0;
+        for(int i = 0; i < Products.size(); i++){
+            Furniture furniture = Products.get(i);
+            totalPrice += furniture.calculatePrice();
+        }
+        return totalPrice;
         
     }
     
-    public void clearAll(){
-        
+
+    
+    public void clearAll() {
+        Products.clear();
     }
     
     public void updateItem(){
@@ -63,5 +72,19 @@ public class Order implements Serializable {
         return false;
         
     }
+    
+    public boolean isSizeValid(){
+        int size = Products.size();
+        if(size < 9){
+            return true;
+        }
+        System.out.println("Basket full!");
+        return false;
+    }
+    
+    
+
+    
+
     
 }

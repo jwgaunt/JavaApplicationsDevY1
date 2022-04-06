@@ -10,6 +10,7 @@ package com.mycompany.w9042147_gaunt_joe_jad_ica_part2;
  */
 public class Table extends Furniture {
     
+    private String image = "table.jpg";
     private int diameter;
     
     private double sizeOfTable;
@@ -19,33 +20,33 @@ public class Table extends Furniture {
     private int priceOfBase;
     
     private baseType baseType;
-    
 
-    public Table (int idNumber, 
-            int itemPrice, 
-            typeOfWood typeOfWood, 
-            int quantity, 
-            double sizeOfTable, 
-            baseType baseType ){
-        super(idNumber, itemPrice, typeOfWood, quantity);
-        this.sizeOfTable = sizeOfTable;
+    public Table(int idNumber, typeOfWood typeOfWood, int quantity,
+            int diameter, baseType baseType) {
+        super(idNumber, typeOfWood, quantity);
+        this.diameter = diameter;
         this.baseType = baseType;
     }
-    
-    @Override
-    public double calculatePrice(){
         
+    @Override
+    public int calculatePrice(){
+        int itemPrice = 0;
         int amountOfWood = this.diameter * this.diameter;
         itemPrice = (amountOfWood * typeOfWood.getPriceOfWood()) + baseType.getPriceOfBase();
-        this.itemPrice = itemPrice * quantity;
+        itemPrice = itemPrice * quantity;
         return itemPrice;
         
     }   
 
     @Override
     public String toString() {
-        return super.toString()+ "Table{" + "sizeOfTable=" + sizeOfTable + ", baseType=" + baseType + '}';
+        return super.toString()+ "Table{" + "Diameter=" + diameter + ", baseType=" + baseType + '}';
     }
+    
+    @Override
+    public String getImage() {
+        return image; //To change body of generated methods, choose Tools | Templates.
+    }    
     
     
     

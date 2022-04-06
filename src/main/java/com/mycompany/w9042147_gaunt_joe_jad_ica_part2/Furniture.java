@@ -11,41 +11,45 @@ import java.io.Serializable;
  * @author jwgau
  */
 public abstract class Furniture implements Serializable {
-    
+
+    protected String image;
     protected int idNumber;
-    protected int itemPrice;
+    //protected int itemPrice;
     protected typeOfWood typeOfWood;
     protected int quantity;
 
-    public Furniture(int idNumber, int itemPrice, typeOfWood typeOfWood, int quantity) {
+    public Furniture(int idNumber, typeOfWood typeOfWood, int quantity) {
         this.idNumber = idNumber;
-        this.itemPrice = itemPrice;
         this.typeOfWood = typeOfWood;
         this.quantity = quantity;
-       
+
     }
-   
-    public double calculatePrice(){
-        
+
+    public abstract int calculatePrice();
+
+    public int getIDNumber() {
+
         return 0;
-        
+
     }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+
+
     
-    public int getIDNumber(){
-        
-        return 0;
-        
-    }
+    
+    
 
     @Override
     public String toString() {
-        return "Furniture{" + "idNumber=" + idNumber + ", itemPrice=" + itemPrice + ", typeOfWood=" + typeOfWood + '}';
+        return "Furniture{" + "idNumber=" + idNumber + ", itemPrice=" + calculatePrice() + ", typeOfWood=" + typeOfWood + '}';
     }
-    
-    
-    
-    
-    
-    
-    
+
 }
