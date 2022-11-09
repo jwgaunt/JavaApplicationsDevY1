@@ -12,6 +12,7 @@ import java.io.Serializable;
  */
 public abstract class Furniture implements Serializable {
 
+    //declaring instance variables
     protected String image;
     protected int idNumber;
     //protected int itemPrice;
@@ -41,15 +42,11 @@ public abstract class Furniture implements Serializable {
         this.image = image;
     }
 
-
-
-    
-    
-    
-
     @Override
     public String toString() {
-        return "Furniture{" + "idNumber=" + idNumber + ", itemPrice=" + calculatePrice() + ", typeOfWood=" + typeOfWood + '}';
+        return "Furniture{" + "idNumber=" + idNumber + ","
+                + " itemPrice=" + calculatePrice() + ","
+                + " typeOfWood=" + typeOfWood + '}';
     }
 
 }

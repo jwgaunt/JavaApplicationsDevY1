@@ -4,19 +4,33 @@
  */
 package com.mycompany.w9042147_gaunt_joe_jad_ica_part2;
 
+import java.awt.event.MouseEvent;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
-import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
  * @author jwgau
  */
 public class mainPanel extends javax.swing.JFrame {
-    Order currentOrder = new Order();
-    DefaultListModel <Furniture> myModel = new DefaultListModel();
+    
 
+    Order currentOrder = new Order();
+    int itemPrice;
+
+    DefaultListModel<Furniture> myModel = new DefaultListModel();
 
     /**
      * Creates new form mainPanel
@@ -78,7 +92,11 @@ public class mainPanel extends javax.swing.JFrame {
         createTable = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         myBasket = new javax.swing.JList<>();
+        orderSummary = new javax.swing.JButton();
+        price = new javax.swing.JTextField();
         clearOrder = new javax.swing.JButton();
+        saveOrder = new javax.swing.JButton();
+        loadOrder = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -92,10 +110,12 @@ public class mainPanel extends javax.swing.JFrame {
             }
         });
 
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel8.setText("ID number");
 
         typeOfWoodChair.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Oak", "Walnut" }));
 
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel12.setText("Quantity");
 
         chairID.setText("Enter ID number");
@@ -117,15 +137,19 @@ public class mainPanel extends javax.swing.JFrame {
             }
         });
 
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel11.setText("Add armrests");
 
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel15.setText("Display price");
 
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel14.setText("Type of wood");
 
         jLabel13.setBackground(new java.awt.Color(0, 51, 255));
         jLabel13.setText("Chair picture here");
 
+        createChair.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         createChair.setText("CREATE CHAIR");
         createChair.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -210,6 +234,7 @@ public class mainPanel extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel1.setText("Display price");
 
         depthDesk.setText("Depth");
@@ -226,6 +251,7 @@ public class mainPanel extends javax.swing.JFrame {
 
         drawsDesk.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4" }));
 
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel6.setText("Enter width");
 
         idDesk.setText("Enter ID number");
@@ -247,8 +273,10 @@ public class mainPanel extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setText("Type of wood");
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("Amount of draws");
 
         deskPicture.setBackground(new java.awt.Color(0, 51, 255));
@@ -259,10 +287,13 @@ public class mainPanel extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("Quantity");
 
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel5.setText("ID number");
 
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel7.setText("Enter depth");
 
         quantityDesk.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5" }));
@@ -273,6 +304,7 @@ public class mainPanel extends javax.swing.JFrame {
             }
         });
 
+        createDesk.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         createDesk.setText("CREATE DESK");
         createDesk.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -382,12 +414,16 @@ public class mainPanel extends javax.swing.JFrame {
             }
         });
 
+        jLabel21.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel21.setText("Type of wood");
 
+        jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel18.setText("Base type");
 
+        jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel19.setText("Quantity");
 
+        jLabel22.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel22.setText("Enter diameter");
 
         tableDiameter.setModel(new javax.swing.SpinnerNumberModel(50, 50, 400, 10));
@@ -407,12 +443,15 @@ public class mainPanel extends javax.swing.JFrame {
             }
         });
 
+        jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel17.setText("ID number");
 
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel16.setText("Display price");
 
         jLabel9.setText("Table picture here");
 
+        createTable.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         createTable.setText("CREATE TABLE");
         createTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -498,13 +537,59 @@ public class mainPanel extends javax.swing.JFrame {
         myBasket.setLayoutOrientation(javax.swing.JList.HORIZONTAL_WRAP);
         myBasket.setMaximumSize(new java.awt.Dimension(3, 3));
         myBasket.setMinimumSize(new java.awt.Dimension(3, 3));
-        myBasket.setPreferredSize(new java.awt.Dimension(3, 3));
+        myBasket.setVisibleRowCount(-1);
+        myBasket.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                myBasketMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(myBasket);
 
+        orderSummary.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        orderSummary.setText("ORDER SUMMARY");
+        orderSummary.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                orderSummaryMouseClicked(evt);
+            }
+        });
+
+        price.setEditable(false);
+        price.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        price.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        price.setText("Total Price: £0.00");
+        price.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        price.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                priceComponentShown(evt);
+            }
+        });
+        price.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                priceActionPerformed(evt);
+            }
+        });
+
+        clearOrder.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         clearOrder.setText("CLEAR ORDER");
         clearOrder.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 clearOrderMouseClicked(evt);
+            }
+        });
+
+        saveOrder.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        saveOrder.setText("SAVE ORDER");
+        saveOrder.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                saveOrderMouseClicked(evt);
+            }
+        });
+
+        loadOrder.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        loadOrder.setText("LOAD ORDER");
+        loadOrder.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                loadOrderMouseClicked(evt);
             }
         });
 
@@ -518,17 +603,30 @@ public class mainPanel extends javax.swing.JFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(clearOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(price, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
+                                .addComponent(orderSummary)))
+                        .addGap(26, 26, 26))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(clearOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(41, 41, 41)
+                        .addComponent(saveOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(43, 43, 43)
+                        .addComponent(loadOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap(19, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -536,10 +634,19 @@ public class mainPanel extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(clearOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(14, 14, 14))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(price)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(orderSummary, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 618, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(saveOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(loadOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(clearOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())))
         );
 
         pack();
@@ -591,21 +698,25 @@ public class mainPanel extends javax.swing.JFrame {
 
     private void idDeskMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_idDeskMouseClicked
         // TODO add your handling code here:
+        //This will set the text field to empty when the mouse is clicked
         idDesk.setText("");
     }//GEN-LAST:event_idDeskMouseClicked
 
     private void widthDeskMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_widthDeskMouseClicked
         // TODO add your handling code here:
+        //This will set the text field to empty when the mouse is clicked
         widthDesk.setText("");
     }//GEN-LAST:event_widthDeskMouseClicked
 
     private void depthDeskMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_depthDeskMouseClicked
         // TODO add your handling code here:
+        //This will set the text field to empty when the mouse is clicked
         depthDesk.setText("");
     }//GEN-LAST:event_depthDeskMouseClicked
 
     private void chairIDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chairIDMouseClicked
         // TODO add your handling code here:
+        //This will set the text field to empty when the mouse is clicked
         chairID.setText("");
     }//GEN-LAST:event_chairIDMouseClicked
 
@@ -616,6 +727,7 @@ public class mainPanel extends javax.swing.JFrame {
 
     private void tableIDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableIDMouseClicked
         // TODO add your handling code here:
+        //This will set the text field to empty when the mouse is clicked
         tableID.setText("");
     }//GEN-LAST:event_tableIDMouseClicked
 
@@ -624,134 +736,446 @@ public class mainPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_createDeskActionPerformed
 
     private void createDeskMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createDeskMouseClicked
-        //creating desk object based on user set constraints
-       if(currentOrder.isSizeValid() == true){
+        //This method is used for compilation of the desk object using the
+        //user inputted constraints.
+
+        //Below I carry out a simple check by calling the method isSizeValid()
+        //if the method returns true, we know the size is valid
+        //and can proceed with the method
+        if (currentOrder.isSizeValid() == true) {
             try {
+                //if order size is valid, use the parseInt method to convert 
+                //the inputted text for ID into the correct integer format.
+                int deskID = Integer.parseInt(idDesk.getText());
+                int deskWidth = Integer.parseInt(widthDesk.getText());
+                int deskDepth = Integer.parseInt(depthDesk.getText());
+
+            } catch (NumberFormatException e) {
+                //if an invalid constraint was entered, set the text to
+                //invalid input.
+                idDesk.setText("Invalid input!");
+                widthDesk.setText("Invalid input!");
+                depthDesk.setText("Invalid input!");
+                
+                
+
+            }
+
             int deskID = Integer.parseInt(idDesk.getText());
             int deskWidth = Integer.parseInt(widthDesk.getText());
             int deskDepth = Integer.parseInt(depthDesk.getText());
 
-        } catch (NumberFormatException e) {
-            idDesk.setText("Invalid input!");
+            //Below I am converting our enum value typeOfWood to a String value
+            String currentWood = typeOfWoodDesk.getSelectedItem().toString();
+            typeOfWood wood = typeOfWood.valueOf(currentWood);
 
+            //Below I am setting variables for quantity and number of draws, 
+            //the +1 is required due to both values needing to start at 1, not 0
+            int quantity = quantityDesk.getSelectedIndex() + 1;
+            int numberOfDraws = drawsDesk.getSelectedIndex() + 1;
+
+            //creating a new desk object using the inputted parameters
+            Desk currentDesk = new Desk(deskID, wood, quantity, numberOfDraws,
+                    deskWidth, deskDepth);
+
+            //add the created object to the current order
+            currentOrder.addProduct(currentDesk);
+
+            //using a CellRenderer myModel which allows for product images
+            //to be displayed in the correct grid format
+            myBasket.setCellRenderer(new productsRenderer());
+            myBasket.setModel(myModel);
+
+            //adding the current desk object to myModel, this is how the object
+            //is displayed in the basket
+            myModel.addElement(currentDesk);
+
+            //Logic for calculating the total price and displaying it in pounds
+            //and pence, I use pence only inititally and convert to pounds by
+            //casting the variable as a float and dividing by 100, then it is 
+            //simply a matter of adding the £ sign before the value
+            int totalPrice = currentOrder.getTotalPrice();
+            float costInPounds = ((float) totalPrice / 100);
+            String totalPriceString = String.format("%.02f", costInPounds);
+            price.setText(" Total Price: "
+                    + "£" + totalPriceString);
+
+            System.out.printf("Current price is: %d\n",
+                    currentDesk.calculatePrice());
+            System.out.println(currentDesk.toString());
+        } else {
+            //if the isSizeValid method returns false, alert the user that
+            //their basket is full
+            JFrame f = new JFrame();
+            JOptionPane.showMessageDialog(f, "Basket full");
         }
-
-        int deskID = Integer.parseInt(idDesk.getText());
-        int deskWidth = Integer.parseInt(widthDesk.getText());
-        int deskDepth = Integer.parseInt(depthDesk.getText());
-
-        String currentWood = typeOfWoodDesk.getSelectedItem().toString();
-        typeOfWood wood = typeOfWood.valueOf(currentWood);
-
-        int quantity = quantityDesk.getSelectedIndex() + 1;
-        int numberOfDraws = drawsDesk.getSelectedIndex() + 1;
-
-        Desk currentDesk = new Desk(deskID, wood, quantity, numberOfDraws, deskWidth, deskDepth);
-        currentOrder.addProduct(currentDesk);
-        myBasket.setCellRenderer(new productsRenderer());
-        myBasket.setModel(myModel);
-        myModel.addElement(currentDesk);
-        
-      
-        System.out.printf("Current price is: %d\n", currentDesk.calculatePrice());
-        System.out.println(currentDesk.toString());       
-       }
-       else{
-           JFrame f = new JFrame();
-           JOptionPane.showMessageDialog(f,"Basket full");  
-       }
 
     }//GEN-LAST:event_createDeskMouseClicked
 
     private void createChairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createChairMouseClicked
-        // creating chair object based on constraints set by user
-        
-       if(currentOrder.isSizeValid() == true){
+        //This method is used for compilation of the chair object using the
+        //user inputted constraints.
+
+        //Below I carry out a simple check by calling the method isSizeValid()
+        //if the method returns true, we know the size is valid
+        //and can proceed with the method
+        boolean armrests;
+        if (currentOrder.isSizeValid() == true) {
             try {
+                //if order size is valid, use the parseInt method to convert 
+                //the inputted text for ID into the correct integer format.                
+                int idChair = Integer.parseInt(chairID.getText());
+
+            } catch (NumberFormatException e) {
+                //if an invalid ID was entered, set the text to invalid input.            
+                chairID.setText("Invalid input!");
+                
+
+            }
+
             int idChair = Integer.parseInt(chairID.getText());
 
-        } catch (NumberFormatException e) {
-            chairID.setText("Invalid input!");
+            //Below I am converting our enum value typeOfWood to a String value
+            String currentWood = typeOfWoodChair.getSelectedItem().toString();
+            typeOfWood wood = typeOfWood.valueOf(currentWood);
 
-        }
-        boolean armrests;
-        int idChair = Integer.parseInt(chairID.getText());
-        String currentWood = typeOfWoodChair.getSelectedItem().toString();
-        typeOfWood wood = typeOfWood.valueOf(currentWood);   
-        int quantity = quantityChair.getSelectedIndex() + 1;
-        int currentArmrests = armrestsChair.getSelectedIndex() + 1;
-        
-        if(currentArmrests == 2){
-            armrests = true;
-        }
-        else{
-            armrests = false;
-        }
-       
-        
-        Chair currentChair = new Chair(idChair, wood, quantity, armrests);
-        currentOrder.addProduct(currentChair);
-        myBasket.setCellRenderer(new productsRenderer());
-        myBasket.setModel(myModel);
-        myModel.addElement(currentChair);        
-        System.out.println(currentChair.toString());       
-       }
-       else{
-           JFrame f = new JFrame();
-           JOptionPane.showMessageDialog(f,"Basket full");  
-       }       
+            //Below I am setting variables for quantity and armrests 
+            //the +1 is required due to both values needing to start at 1, not 0        
+            int quantity = quantityChair.getSelectedIndex() + 1;
+            int currentArmrests = armrestsChair.getSelectedIndex() + 1;
 
-        
+            if (currentArmrests == 2) {
+                armrests = true;
+            } else {
+                armrests = false;
+            }
+
+            //creating chair object based on given constraints
+            Chair currentChair = new Chair(idChair, wood, quantity, armrests);
+            //adding the chair to the current order
+            currentOrder.addProduct(currentChair);
+
+            //setting the cellRenderer for my JList (basket) using myModel
+            //before adding the current chair
+            myBasket.setCellRenderer(new productsRenderer());
+            myBasket.setModel(myModel);
+            myModel.addElement(currentChair);
+
+            //calculating price logic
+            int totalPrice = currentOrder.getTotalPrice();
+            float costInPounds = ((float) totalPrice / 100);
+            String totalPriceString = String.format("%.02f", costInPounds);
+            price.setText(" Total Price: "
+                    + "£" + totalPriceString);
+            System.out.println(currentChair.toString());
+        } else {
+            //if isSizeValid returns false, alert the user that the basket
+            //is full
+            JFrame f = new JFrame();
+            JOptionPane.showMessageDialog(f, "Basket full");
+        }
+
+
     }//GEN-LAST:event_createChairMouseClicked
 
     private void createTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createTableMouseClicked
-        // creating table object based on constraints set by user
-       if(currentOrder.isSizeValid() == true){
-           
+        //This method is used for compilation of the table object using the
+        //user inputted constraints.
+
+        //Below I carry out a simple check by calling the method isSizeValid()
+        //if the method returns true, we know the size is valid
+        //and can proceed with the method
+        
+        if (currentOrder.isSizeValid() == true) {
+
             try {
+                //if order size is valid, use the parseInt method to convert 
+                //the inputted text for ID into the correct integer format.                   
+                int idTable = Integer.parseInt(tableID.getText());
+
+            } catch (NumberFormatException e) {
+                //if an invalid ID was entered, set the text to invalid input.             
+                tableID.setText("Invalid input!");
+
+            }
+
+            //converting baseType enum to a String value    
+            String currentBaseType = baseTypeTable.getSelectedItem().toString();
+            baseType chosenBase = baseType.valueOf(currentBaseType);
+
+            //setting quantity variable
+            int quantity = quantityTable.getSelectedIndex() + 1;
+
+            //converting typeOfWood enum to a String value
+            String currentWood = typeOfWoodTable.getSelectedItem().toString();
+            typeOfWood wood = typeOfWood.valueOf(currentWood);
+
+            //using parseInt to convert ID and diameter to an integer value
             int idTable = Integer.parseInt(tableID.getText());
+            int chosenDiameter = Integer.parseInt
+        (tableDiameter.getValue().toString());
 
-        } catch (NumberFormatException e) {
-            tableID.setText("Invalid input!");
+            //creating table object based on user entered constraints
+            Table currentTable = new Table(idTable, wood, quantity,
+                    chosenDiameter, chosenBase);
 
+            System.out.println(currentTable.toString());
+            System.out.println(currentTable.calculatePrice());
+
+            //adding table to current order
+            currentOrder.addProduct(currentTable);
+
+            //displaying current table on JList using myModel
+            myBasket.setCellRenderer(new productsRenderer());
+            myBasket.setModel(myModel);
+            myModel.addElement(currentTable);
+
+            //logic for calculating price
+            int totalPrice = currentOrder.getTotalPrice();
+            float costInPounds = ((float) totalPrice / 100);
+            String totalPriceString = String.format("%.02f", costInPounds);
+            price.setText(" Total Price: "
+                    + "£" + totalPriceString);
+
+        } else {
+            //if isSizeValid returned false, alert user that basket is full
+            JFrame f = new JFrame();
+            JOptionPane.showMessageDialog(f, "Basket full");
         }
-        String currentBaseType = baseTypeTable.getSelectedItem().toString();
-        baseType chosenBase = baseType.valueOf(currentBaseType);  
-        int quantity = quantityTable.getSelectedIndex() + 1;
-        String currentWood = typeOfWoodTable.getSelectedItem().toString();
-        typeOfWood wood = typeOfWood.valueOf(currentWood); 
-        int idTable = Integer.parseInt(tableID.getText());
-       // int chosenDiameter = tableDiameter.getValue().toString();
-        int chosenDiameter = Integer.parseInt(tableDiameter.getValue().toString());
-        System.out.println(chosenDiameter);
-        
-        Table currentTable = new Table(idTable, wood, quantity, chosenDiameter, chosenBase);
-        
-        
-        System.out.println(currentTable.toString());
-        currentOrder.addProduct(currentTable);
-        myBasket.setCellRenderer(new productsRenderer());
-        myBasket.setModel(myModel);
-        myModel.addElement(currentTable);             
-           
-       }
-       else{
-           JFrame f = new JFrame();
-           JOptionPane.showMessageDialog(f,"Basket full");  
-       }       
 
     }//GEN-LAST:event_createTableMouseClicked
 
-    private void clearOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearOrderMouseClicked
-        // TODO add your handling code here:
-        currentOrder.clearAll();
-        myModel.removeAllElements();
-    }//GEN-LAST:event_clearOrderMouseClicked
+    private void orderSummaryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderSummaryMouseClicked
+
+        //outputs details of the current order to the console
+        System.out.println(currentOrder.toString());
+    }//GEN-LAST:event_orderSummaryMouseClicked
 
     private void deskPictureComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_deskPictureComponentShown
         // TODO add your handling code here:
 
     }//GEN-LAST:event_deskPictureComponentShown
+
+    private void priceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_priceActionPerformed
+
+    private void priceComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_priceComponentShown
+        // TODO add your handling code here:
+    }//GEN-LAST:event_priceComponentShown
+
+    private void clearOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearOrderMouseClicked
+
+        //this method is used to clear all products from the order
+        
+        //confirm that the user would like to clear order
+        JFrame f = new JFrame();
+        int result = JOptionPane.showConfirmDialog
+        (f, "Are you sure you want to clear the order? ",
+                "Clear order",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+
+        if (result == JOptionPane.YES_OPTION) {
+            //if user confirms, call the clearAll method to remove all products
+            currentOrder.clearAll();
+            
+            //remove all products from the order grid
+            myModel.removeAllElements();
+            
+            //recalculate current price variable (0)
+            int totalPrice = currentOrder.getTotalPrice();
+            float costInPounds = ((float) totalPrice / 100);
+            String totalPriceString = String.format("%.02f", costInPounds);
+            price.setText(" Total Price: "
+                    + "£" + totalPriceString);
+            
+        } else if (result == JOptionPane.NO_OPTION) {
+            //if user does not confirm deletion output a message to the console
+            
+            System.out.println("Deletion cancelled.");
+        }
+
+    }//GEN-LAST:event_clearOrderMouseClicked
+
+    private void myBasketMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_myBasketMouseClicked
+        // Logic for handling mouse presses on the order grid
+
+        JFrame j = new JFrame();
+
+        //if left mouse button was clicked, display product information 
+        //using a JOptionPane
+        if (evt.getButton() == MouseEvent.BUTTON1) {
+            //working out which product the user is trying to interact with
+            int index = myBasket.locationToIndex(evt.getPoint());
+            JOptionPane.showMessageDialog(j, myModel.getElementAt(index),
+                    "Product information", JOptionPane.INFORMATION_MESSAGE);
+
+        }
+
+        //if middle mouse button was clicked - wrong code update later
+        if (evt.getButton() == MouseEvent.BUTTON2) {
+            //working out which product the user is trying to interact with
+            int index = myBasket.locationToIndex(evt.getPoint());
+            JOptionPane.showMessageDialog(j, myModel.getElementAt(index));
+        }
+
+        //if right mouse button was clicked, delete the appropriate product
+        if (evt.getButton() == MouseEvent.BUTTON3) {
+            //working out which product the user is trying to interact with
+            int index = myBasket.locationToIndex(evt.getPoint());
+
+            //confirm that the user would like to delete the product
+            int result = JOptionPane.showConfirmDialog(j,
+                    "Would you like to delete this product?", "Delete product",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE);
+
+            if (result == JOptionPane.YES_OPTION) {
+                //removing product from myModel and currentOrder
+                //remove element (index) from the order grid
+                myModel.remove(index);
+                
+                //remove the object from currentOrder
+                currentOrder.removeItem(index);
+                
+                //updating the total price variable
+                int totalPrice = currentOrder.getTotalPrice();
+                float costInPounds = ((float) totalPrice / 100);
+                String totalPriceString = String.format("%.02f", costInPounds);
+                price.setText(" Total Price: "
+                        + "£" + totalPriceString);
+
+            } else if (result == JOptionPane.NO_OPTION) {
+                //if user did not confirm deletion, output message to the
+               //console
+                System.out.println("Deletion cancelled.");
+
+            }
+        }
+    }//GEN-LAST:event_myBasketMouseClicked
+
+    private void saveOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveOrderMouseClicked
+        String userFile;
+        try {
+            // using JFileChooser to select location to save
+            JFileChooser chooser = new JFileChooser();
+            FileFilter filter = new FileNameExtensionFilter("DAT file", new String[] {"dat"});
+            chooser.setFileFilter(filter);
+            chooser.addChoosableFileFilter(filter);            
+            int response = chooser.showSaveDialog(null);
+            if (response == JFileChooser.APPROVE_OPTION) {
+                //String userFile = chosen file path
+                userFile = chooser.getSelectedFile().getAbsolutePath();
+
+                FileOutputStream file = new FileOutputStream(userFile + ".dat");
+                ObjectOutputStream output = new ObjectOutputStream(file);
+                output.writeObject(currentOrder);
+                output.close();
+                file.close();
+                System.out.println("Order saved");
+
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(mainPanel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(mainPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_saveOrderMouseClicked
+
+    private void loadOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loadOrderMouseClicked
+
+        String userFile;
+        JFrame j = new JFrame();
+        int result = JOptionPane.showConfirmDialog(j,
+                "Loading an order will clear the current order,"
+                + " would you like to proceed?", "Confirm load",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE);
+
+        if (result == JOptionPane.YES_OPTION) {
+
+            currentOrder.clearAll();
+            myModel.removeAllElements();
+
+            try {
+
+                //using JFileChooser to locate the required file
+                JFileChooser chooser = new JFileChooser();
+
+                //creating a filter to default to .dat files
+                FileFilter filter = new FileNameExtensionFilter
+                ("DAT file", new String[]{"dat"});
+                chooser.setFileFilter(filter);
+                chooser.addChoosableFileFilter(filter);
+
+                //opening JFileChooser window
+                int response = chooser.showOpenDialog(null);
+
+                //if the user loads a file, carry out the logic to load order
+                if (response == JFileChooser.APPROVE_OPTION) {
+                    //String userFile = chosen file path
+                    userFile = chooser.getSelectedFile().getAbsolutePath();
+                    FileInputStream fileInput = new FileInputStream(userFile);
+                    ObjectInputStream input = new ObjectInputStream(fileInput);
+                    currentOrder = (Order) input.readObject();
+                    myBasket.setCellRenderer(new productsRenderer());
+                    myBasket.setModel(myModel);
+
+                    //repopulating the order grid with the appropriate products
+                    for (int i = 0; i < currentOrder.getSize(); i++) {
+                        Furniture furniture = currentOrder.getProducts().get(i);
+                        myModel.addElement(furniture);
+                    }
+                    System.out.println("Order load succesful");
+                    input.close();
+                    fileInput.close();
+
+                    //updating the current price to match the loaded order
+                    int totalPrice = currentOrder.getTotalPrice();
+                    float costInPounds = ((float) totalPrice / 100);
+                    String totalPriceString = String.format
+                    ("%.02f", costInPounds);
+                    price.setText(" Total Price: "
+                            + "£" + totalPriceString);
+                } else {
+                    //Display error message stating load was not succesful 
+                    int loadCancelled = JOptionPane.showConfirmDialog(j,
+                            "File not loaded",
+                            "Loading cancelled",
+                            JOptionPane.DEFAULT_OPTION,
+                            JOptionPane.WARNING_MESSAGE);
+
+                }
+
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(mainPanel.class.getName()).log(Level.SEVERE,
+                        null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(mainPanel.class.getName()).log(Level.SEVERE,
+                        null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(mainPanel.class.getName()).log(Level.SEVERE,
+                        null, ex);
+            }
+        } else {
+            System.out.println("Loading cancelled");
+        }
+        //error message if empty order or invalid file type was loaded
+        if (currentOrder.getSize() == 0) {
+            int loadFailure = JOptionPane.showConfirmDialog(j,
+                    "File was not loaded succesfully,"
+                            + " please ensure you are loading a .dat file"
+                            + " created within this software"
+                            + " that contains products.",
+                    "Error loading file",
+                    JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.WARNING_MESSAGE);
+
+        }
+
+    }//GEN-LAST:event_loadOrderMouseClicked
 
     /**
      * @param args the command line arguments
@@ -762,7 +1186,7 @@ public class mainPanel extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -788,8 +1212,7 @@ public class mainPanel extends javax.swing.JFrame {
             }
         });
     }
-    
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> armrestsChair;
@@ -827,10 +1250,14 @@ public class mainPanel extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JButton loadOrder;
     private javax.swing.JList<Furniture> myBasket;
+    private javax.swing.JButton orderSummary;
+    private javax.swing.JTextField price;
     private javax.swing.JComboBox<String> quantityChair;
     private javax.swing.JComboBox<String> quantityDesk;
     private javax.swing.JComboBox<String> quantityTable;
+    private javax.swing.JButton saveOrder;
     private javax.swing.JSpinner tableDiameter;
     private javax.swing.JTextField tableID;
     private javax.swing.JComboBox<String> typeOfWoodChair;
@@ -839,6 +1266,3 @@ public class mainPanel extends javax.swing.JFrame {
     private javax.swing.JTextField widthDesk;
     // End of variables declaration//GEN-END:variables
 }
-
-
-

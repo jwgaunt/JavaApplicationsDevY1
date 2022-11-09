@@ -30,6 +30,7 @@ public class Table extends Furniture {
         
     @Override
     public int calculatePrice(){
+        //calculating price of table object
         int itemPrice = 0;
         int amountOfWood = this.diameter * this.diameter;
         itemPrice = (amountOfWood * typeOfWood.getPriceOfWood()) + baseType.getPriceOfBase();

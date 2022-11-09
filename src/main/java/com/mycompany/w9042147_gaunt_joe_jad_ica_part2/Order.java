@@ -12,79 +12,100 @@ import java.util.ArrayList;
  * @author jwgau
  */
 public class Order implements Serializable {
-    
-    //private int totalPrice;
-    private ArrayList<Furniture> Products = new ArrayList<>();
-    
 
-    public void addProduct(Furniture furniture){
+    //creating new ArrayList object
+    private ArrayList<Furniture> Products = new ArrayList<>();
+
+    //method to add a product to the ArrayList
+    public void addProduct(Furniture furniture) {
         Products.add(furniture);
-        
+
     }
-    
-    
-    public String save(){
-        
+
+    public int getPrice() {
+
+        for (int i = 0; i < Products.size(); i++) {
+            Furniture furniture = Products.get(i);
+            System.out.println(furniture.calculatePrice());
+        }
+        return 0;
+
+    }
+
+    public String save() {
+
         return null;
-        
+
     }
-    
-    public void load(String file){
-        
+
+    public void load(String file) {
+
     }
-    
-    public void displaySummary(){
+
+    public void displaySummary() {
         System.out.println(Products.toString());
     }
-    
-    public int getTotalPrice(){
+
+    public int getTotalPrice() {
         int totalPrice = 0;
-        for(int i = 0; i < Products.size(); i++){
+        for (int i = 0; i < Products.size(); i++) {
             Furniture furniture = Products.get(i);
             totalPrice += furniture.calculatePrice();
         }
-        return totalPrice;
-        
-    }
-    
 
-    
+        return totalPrice;
+
+    }
+
+    public static void print(ArrayList<Furniture> Products) {
+        for (Furniture furniture : Products) {
+            System.out.println(furniture.calculatePrice());
+        }
+    }
+
     public void clearAll() {
+        //empty the ArrayList
         Products.clear();
     }
-    
-    public void updateItem(){
-        
+
+ 
+
+    public void removeItem(int index) {
+        //Removes an item from the specific index on the order grid
+        Products.remove(index);
     }
-    
-    public void removeItem(){
-        
-    }
-    
-    public boolean validateID(int idNumber){
-        
-        return false;
-        
-    }
-    
-    public boolean validateFile(String fileName){
-        
-        return false;
-        
-    }
-    
-    public boolean isSizeValid(){
+
+ 
+
+    public boolean isSizeValid() {
+        //returns false if the order is full
         int size = Products.size();
-        if(size < 9){
+        if (size < 9) {
             return true;
         }
         System.out.println("Basket full!");
         return false;
     }
     
-    
+    public int getSize(){
+        
+        return Products.size();
+        
+    }
 
-    
+    @Override
+    public String toString() {
+        //returns the current order as a String
 
-    
+        return "Current Order: " + Products.toString() + '}';
+    }
+
+    public ArrayList<Furniture> getProducts() {
+        return Products;
+    }
+
+    public void setProducts(ArrayList<Furniture> Products) {
+        this.Products = Products;
+    }
+
 }

@@ -14,15 +14,19 @@ import javax.swing.ListCellRenderer;
  *
  * @author jwgau
  */
-public class productsRenderer extends DefaultListCellRenderer implements ListCellRenderer <Object> {
+//CellRenderer to allow JList to accept images with good usability 
+//instead of text
+
+public class productsRenderer extends DefaultListCellRenderer
+        implements ListCellRenderer <Object> {
 
     @Override
-    public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+    public Component getListCellRendererComponent(JList<?> list, Object value,
+            int index, boolean isSelected, boolean cellHasFocus) {
         Furniture furniture = (Furniture)value;
         ImageIcon icon = new ImageIcon(furniture.getImage());
-        //Error here to show tomorrow
         setIcon(icon);
-        return this; //To change body of generated methods, choose Tools | Templates.
+        return this;
     }
     
     

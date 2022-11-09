@@ -10,6 +10,7 @@ package com.mycompany.w9042147_gaunt_joe_jad_ica_part2;
  */
 public class Chair extends Furniture {
 
+    //instance variables
     private boolean armrests;
     private String image = "chair.jpg";
 
@@ -26,7 +27,7 @@ public class Chair extends Furniture {
 
     @Override
     public int calculatePrice() {
-        
+        //calculating price of chair object
         int itemPrice = 0;
         if (armrests == true) {
 
@@ -41,6 +42,7 @@ public class Chair extends Furniture {
     
     @Override
     public String getImage() {
-        return image; //To change body of generated methods, choose Tools | Templates.
+        return image; //To change body of generated methods,
+        //choose Tools | Templates.
     }    
 }

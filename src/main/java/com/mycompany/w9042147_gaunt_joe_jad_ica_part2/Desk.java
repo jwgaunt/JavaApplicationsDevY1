@@ -28,12 +28,14 @@ public class Desk extends Furniture {
 
     @Override
     public String toString() {
-        return super.toString() + "Desk{" + "numberOfDraws=" + numberOfDraws + ", width=" + width + ", depth=" + depth + '}';
+        return super.toString() + "Desk{" + "numberOfDraws=" +
+                numberOfDraws + ", width=" + width + ", depth=" + depth + '}';
     }
 
     @Override
     public int calculatePrice() {
-        int itemPrice = 0;
+        //calculating price of desk object
+        int itemPrice;
         
         itemPrice = ((80 + width + depth) + (depth * width)
                 * typeOfWood.getPriceOfWood() + (numberOfDraws * 850));
@@ -45,8 +47,13 @@ public class Desk extends Furniture {
 
     @Override
     public String getImage() {
-        return image; //To change body of generated methods, choose Tools | Templates.
+        //gets the correct image depending on which type
+        //of furniture is appropriate 
+        return image; //To change body of generated
+        //methods, choose Tools | Templates.
     }
+    
+    
 
 
     
